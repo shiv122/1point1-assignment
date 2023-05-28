@@ -28,7 +28,10 @@ npm run dev
 
 # Employee Mass Import
 
-Example File ./example-employee-mass-import.xlsx
+Example File in ./example-employee-mass-import.xlsx
+::: warning
+there should not be any empty or extra cells, rows or columns
+:::
 
 | Name             | Email                   | Date of Birth | Gender | Password | Is Manager |
 | ---------------- | ----------------------- | ------------- | ------ | -------- | ---------- |
