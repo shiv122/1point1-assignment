@@ -36,11 +36,11 @@ rename env.example to .env
 
 # Employee Route
 
-{base link} /employee
+<a href="http://127.0.0.1:8000/employee/">http://127.0.0.1:8000/employee/<a>
 
 # Admin Route
 
-{base link} /admin
+<a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/<a>
 
 # Employee Mass Import
 
