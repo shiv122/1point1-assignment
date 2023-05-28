@@ -1,0 +1,19 @@
+{
+  "menu": [
+    {
+      "url": "admin/",
+      "name": "Home",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "admin.index"
+    },
+    {
+      "menuHeader": "User Management"
+    },
+    {
+      "url": "admin/employees",
+      "name": "Employees",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "slug": "admin.employees.index"
+    }
+  ]
+}

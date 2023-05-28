@@ -1,0 +1,19 @@
+{
+  "menu": [
+    {
+      "url": "employee/",
+      "name": "Home",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "employee.index"
+    },
+    {
+      "menuHeader": "Email Management"
+    },
+    {
+      "url": "employee/mails",
+      "name": "Mails",
+      "icon": "menu-icon tf-icons ti ti-mail",
+      "slug": "employee.mails.index"
+    }
+  ]
+}
