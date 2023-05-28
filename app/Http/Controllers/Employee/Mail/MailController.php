@@ -175,7 +175,7 @@ class MailController extends Controller
     $client = new Client();
     $client->setClientId(env('GOOGLE_CLIENT_ID'));
     $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-    $client->setRedirectUri('http://127.0.0.1:8000/employee/mails/google/callback');
+    $client->setRedirectUri(env('GOOGLE_REDIRECT_URI'));
     $client->addScope('https://www.googleapis.com/auth/gmail.readonly');
     $client->addScope(Google_Service_Gmail::GMAIL_SEND);
     $client->setState('');
@@ -189,7 +189,7 @@ class MailController extends Controller
     $client = new Client();
     $client->setClientId(env('GOOGLE_CLIENT_ID'));
     $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-    $client->setRedirectUri('http://127.0.0.1:8000/employee/mails/google/callback');
+    $client->setRedirectUri(env('GOOGLE_REDIRECT_URI'));
     $token = $client->fetchAccessTokenWithAuthCode($request->get('code'));
     $client->setAccessToken($token['access_token']);
 
