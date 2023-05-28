@@ -30,15 +30,12 @@ npm run dev
 
 Example File in ./example-employee-mass-import.xlsx
 
-<blockquote class="warning">
-there should not be any empty or extra cells, rows or columns
-</blockquote>
-.warning {
-    background-color: #ffeeba;
+<blockquote style="background-color: #ffeeba;
     border-left: 6px solid #ffc107;
     padding: 10px;
-    margin: 10px 0;
-}
+    margin: 10px 0;" class="warning">
+there should not be any empty or extra cells, rows or columns
+</blockquote>
 
 | Name             | Email                   | Date of Birth | Gender | Password | Is Manager |
 | ---------------- | ----------------------- | ------------- | ------ | -------- | ---------- |
