@@ -30,9 +30,9 @@ npm install
 npm run dev
 ```
 
-<blockquote >
-rename env.example to .env
-</blockquote>
+```
+php artisan serve
+```
 
 # Employee Route
 
