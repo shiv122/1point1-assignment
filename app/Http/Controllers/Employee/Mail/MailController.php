@@ -26,7 +26,7 @@ class MailController extends Controller
     // $threads = $gmail->users_threads->listUsersThreads('me');
     $list = $gmail->users_messages->listUsersMessages('me', [
       'q' => 'is:inbox',
-      'maxResults' => 1,
+      'maxResults' => 20,
     ]);
 
     $inboxMessage = $mailManager->getMessageList($list, $gmail);
