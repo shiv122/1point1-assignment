@@ -1,8 +1,9 @@
 # requirements
 
-php 8.1 or grater
-node
+php ^8.1 
+node ^16
 npm
+
 
 # step
 
