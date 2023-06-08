@@ -34,7 +34,7 @@ class MailManager
     $client = new Client();
     $client->setClientId(env('GOOGLE_CLIENT_ID'));
     $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-    $client->setRedirectUri('http://127.0.0.1:8000/admin/mails/google/callback');
+    $client->setRedirectUri('http://127.0.0.1:9000/employee/mails/google/callback');
 
 
     $client->setAccessToken($user->access_token);

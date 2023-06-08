@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Managers\FileManager;
-use App\Http\Controllers\Controller;
 use App\Imports\ImportEmployee;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class BasicController extends Controller
 {
@@ -102,20 +103,97 @@ class BasicController extends Controller
     ]);
   }
 
-  public function bulkStore(Request $request)
+  public function bulkStore(Request $request, FileManager $fileManager)
   {
     $request->validate([
       'file' => 'required|file|mimes:csv,xlsx'
     ]);
 
 
-    Excel::import(new ImportEmployee, $request->file);
+    $sheet_path = $fileManager->upload($request->file, 'excel', 'emp-');
 
+    $filePath = public_path($sheet_path);
+    // Excel::import(new ImportEmployee, public_path('excel/excel-512569b99331b9e4f46ef72adcff409dbb8050618de.xlsx'));
+
+    $spreadsheet = IOFactory::load($filePath);
+
+    $drawingCollection = $spreadsheet->getActiveSheet()->getDrawingCollection();
+    $worksheet = $spreadsheet->getActiveSheet();
+    $images = [];
+    $rows = [];
+    $firstRow = [];
+
+    foreach ($worksheet->getRowIterator() as $key =>  $row) {
+
+      $rowData = [];
+      $images = [];
+      foreach ($row->getCellIterator() as $cell) {
+
+        $drawingCollection = $cell->getWorksheet()->getDrawingCollection();
+        if (!empty($drawingCollection)) {
+          foreach ($drawingCollection as $drawing) {
+            if ($drawing instanceof \PhpOffice\PhpSpreadsheet\Worksheet\Drawing) {
+              $imagePath = $drawing->getPath();
+              $imageData = base64_encode(file_get_contents($imagePath));
+              $extension = pathinfo($imagePath, PATHINFO_EXTENSION);
+              $images[] = [
+                'name' => $drawing->getName(),
+                'image' => $imageData,
+                'extension' => $extension,
+              ];
+            }
+          }
+        }
+
+        $rowData[] =  $cell->getValue();
+      }
+      if (empty($firstRow)) {
+        $firstRow =  $rowData;
+        continue;
+      }
+      $rows[] = [...array_combine($firstRow, $rowData), 'IMAGE' => $images[0] ?? null];
+    }
+
+
+    $insertData = [];
+
+    foreach ($rows as $key => $row) {
+      $insertData[] = [
+        'name' => $row['NAME'],
+        'email' => $row['EMAIL'],
+        'dob' => $row['DOB'],
+        'gender' => $row['GENDER'],
+        'password' => bcrypt($row['PASSWORD']),
+        'is_manager' => $row['IS_MANAGER'] === 'yes',
+        'image' => ($row['IMAGE']) ? $this->saveBase64Image($row['IMAGE']['image'], $row['IMAGE']['extension']) : null,
+        'role' => 'employee'
+      ];
+    }
+
+
+
+    User::insert($insertData);
 
     return response([
       'status' => 'success',
       'message' => 'Employees added successfully',
       'refresh_table' => true,
     ]);
+  }
+
+
+  public function saveBase64Image($base64String, $extension)
+  {
+
+
+
+    $fileName = uniqid() . '.' . $extension;
+    $pub_path = 'images/employee/profile' . $fileName;
+    $filePath = public_path($pub_path);
+
+
+    file_put_contents($filePath, base64_decode($base64String));
+
+    return $pub_path;
   }
 }
