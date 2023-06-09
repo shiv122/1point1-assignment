@@ -103,7 +103,9 @@
 
 
     <script>
-        $('#dob').flatpickr();
+        $('#dob').flatpickr({
+            maxDate: new Date().fp_incr(-18 * 365),
+        });
         $('#add-employee-form').submit(async function(e) {
             e.preventDefault();
             const response = await rebound({
@@ -148,7 +150,8 @@
             $(modal + ' #username').val(data.name);
             $(modal + ' #email').val(data.email);
             $('#edit_dob').flatpickr({
-                defaultDate: data.dob
+                defaultDate: data.dob,
+                maxDate: new Date().fp_incr(-18 * 365),
             })
             $('#edit_gender').selectpicker('val', data.gender)
             $('#edit_is_manager').selectpicker('val', (data.is_manager) ? 'yes' : 'no')

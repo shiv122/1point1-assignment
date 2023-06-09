@@ -103,7 +103,9 @@
     <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
 
     <script>
-        $('#dob').flatpickr();
+        $('#dob').flatpickr({
+            maxDate: new Date().fp_incr(-18 * 365),
+        });
         $('#register-form').submit(async function(e) {
             e.preventDefault();
             const response = await rebound({

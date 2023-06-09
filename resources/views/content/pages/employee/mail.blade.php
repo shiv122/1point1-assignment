@@ -348,5 +348,23 @@
                 });
             }, 1000);
         });
+
+
+        $(document).on('click', '[data-attachment]', function(e) {
+            e.preventDefault();
+
+            const atch = $(this).data('attachment');
+
+            downloadBase64File(atch.data, atch.content_type, atch.filename)
+
+        });
+
+        function downloadBase64File(base64Data, contentType, fileName) {
+            const linkSource = `data:${contentType};base64,${base64Data}`;
+            const downloadLink = document.createElement("a");
+            downloadLink.href = linkSource;
+            downloadLink.download = fileName;
+            downloadLink.click();
+        }
     </script>
 @endsection

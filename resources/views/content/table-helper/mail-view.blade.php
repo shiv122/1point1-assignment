@@ -115,8 +115,24 @@
             </div>
         </div>
         <div class="card-body">
+            {!! $mail['mail_snippet'] !!}
             {!! $mail['body'] !!}
+            @forelse ($mail['attachment'] as $atch)
+                @if ($loop->first)
+                    <hr>
+                    <p class="email-attachment-title mb-2">Attachments</p>
+                @endif
+
+                <div class="cursor-pointer">
+                    <i class="ti ti-file"></i>
+                    <span data-attachment="{{ json_encode($atch) }}"
+                        class="align-middle ms-1">{{ $atch['filename'] }}</span>
+                </div>
+                {{-- <img src="data:image/png;base64,{{ $atch['data'] }}" alt=""> --}}
+            @empty
+            @endforelse
         </div>
+
     </div>
     <div class="email-reply card mt-4 mx-sm-4 mx-3">
         <h6 class="card-header border-0">Reply to {{ $mail['mail_sender'] }}</h6>
