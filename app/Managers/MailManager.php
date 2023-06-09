@@ -118,7 +118,7 @@ class MailManager
   }
 
 
-  public function replyToEmailById($gmail, $emailId, $subject, $body, $atch = [])
+  public function replyToEmailById($gmail, $emailId, $subject, $body)
   {
     $message = new Google_Service_Gmail_Message();
 
@@ -152,7 +152,7 @@ class MailManager
     return $sentMessage;
   }
 
-  private function createReplyRawMessage($replyToAddress, $subject, $body, $attachment = null)
+  private function createReplyRawMessage($replyToAddress, $subject, $body)
   {
     $rawMessageString = "From: shivtiwari627@gmail.com\r\n";
     $rawMessageString .= "To: $replyToAddress\r\n";
@@ -162,12 +162,6 @@ class MailManager
     $rawMessageString .= "Content-Type: text/plain; charset=utf-8\r\n";
     $rawMessageString .= "\r\n";
     $rawMessageString .= $body;
-
-    if ($attachment) {
-      $rawMessageString .= '--boundary' . "\r\n";
-
-      $rawMessageString .= '--boundary--';
-    }
 
     return rtrim(strtr(base64_encode($rawMessageString), '+/', '-_'), '=');
   }
