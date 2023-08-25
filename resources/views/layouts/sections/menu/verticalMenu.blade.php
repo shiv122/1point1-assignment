@@ -25,7 +25,7 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        @foreach ($menuData[auth()->user()->role]->menu as $menu)
+        @foreach ($menuData[auth()->user()->role_route]->menu as $menu)
             {{-- adding active and open class if child is active --}}
 
             {{-- menu headers --}}

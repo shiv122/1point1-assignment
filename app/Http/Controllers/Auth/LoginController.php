@@ -25,17 +25,18 @@ class LoginController extends Controller
 
     $credentials = $request->only('email', 'password');
 
-    if (auth()->attempt($credentials, $request->remember_me)) {
-      $request->session()->regenerate();
-
-      return response()->json([
-        'message' => 'Successfully logged in',
-        'redirect' => route(auth()->user()->role . '.index'),
+    if (!auth()->attempt($credentials, $request->remember_me)) {
+      throw ValidationException::withMessages([
+        'email' => ['The provided credentials are incorrect.'],
       ]);
     }
 
-    throw ValidationException::withMessages([
-      'email' => ['The provided credentials are incorrect.'],
+
+    $request->session()->regenerate();
+
+    return response()->json([
+      'message' => 'Successfully logged in',
+      'redirect' => route('admin.index'),
     ]);
   }
 

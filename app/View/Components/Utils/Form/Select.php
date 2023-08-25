@@ -47,7 +47,7 @@ class Select extends Component
     $appendOptionText = null,
     $appendOptionValue = null,
     array $attrs = null,
-    array $selected = null,
+    array|string $selected = null,
     $subtext = null,
     $search = true,
     $icon = null,

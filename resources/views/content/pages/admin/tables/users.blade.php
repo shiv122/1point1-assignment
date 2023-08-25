@@ -6,85 +6,65 @@
     <x-utils.card>
         <div class="row mb-4">
             <div class="col-md-12 text-end">
-                <button type="button" class="btn btn-label-info waves-effect" data-bs-toggle="offcanvas"
-                    data-bs-target="#add-employee-bulk-modal">Bulk Add</button>
                 <button type="button" class="btn btn-label-success waves-effect" data-bs-toggle="offcanvas"
-                    data-bs-target="#add-employee-modal">Add</button>
+                    data-bs-target="#add-user-modal">Add</button>
             </div>
         </div>
-        <livewire:tables.employee-table />
+        <livewire:tables.user-table />
     </x-utils.card>
 
 
-    <x-utils.offcanvas id="add-employee-modal" title="Add employee">
-        <form id="add-employee-form">
+    <x-utils.offcanvas id="add-user-modal" title="Add user">
+        <form id="add-user-form">
             <div class="mb-3">
-                <x-utils.form.input name="username" />
+                <x-utils.form.input name="first_name" />
+            </div>
+            <div class="mb-3">
+                <x-utils.form.input name="last_name" />
             </div>
             <div class="mb-3">
                 <x-utils.form.input name="email" type="email" />
             </div>
-            <div class="mb-3">
-                <x-utils.form.input name="dob" label="Date of birth" />
-            </div>
-            <div class="mb-3">
-                <x-utils.form.input name="image" type="file" />
-            </div>
-            <div class="mb-3">
-                <x-utils.form.select name="gender" :options="['male', 'female', 'other']" />
-            </div>
-            <div class="mb-3">
-                <x-utils.form.select name="is_manager" :options="['yes', 'no']" />
-            </div>
+
             <div class="mb-3 form-password-toggle">
                 <x-utils.form.input name="password" type="password" />
             </div>
+            <div class="mb-3 form-password-toggle">
+                <x-utils.form.input label="Confirm Password" placeholder="Re-enter password" name="password_confirmation"
+                    type="password" />
+            </div>
+
+            <div class="mb-3">
+                <x-utils.form.select name="role" :options="['user', 'admin', 'sales']" selected="user" />
+            </div>
             <div class="mt-4  text-center">
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </div>
         </form>
     </x-utils.offcanvas>
 
-    <x-utils.offcanvas id="add-employee-bulk-modal" title="Add employee">
-        <form id="add-employee-bulk-form">
-            <div class="mb-3">
-                <x-utils.form.input name="file" label="Add csv or excel" type="file" />
-            </div>
-            <div class="mt-4  text-center">
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            </div>
-        </form>
-    </x-utils.offcanvas>
 
-    <x-utils.offcanvas id="edit-employee-modal" title="edit employee">
-        <form id="edit-employee-form">
+    <x-utils.offcanvas id="edit-user-modal" title="Edit user">
+        <form id="edit-user-form">
             <div class="mb-3">
-                <x-utils.form.input name="username" />
+                <x-utils.form.input name="first_name" />
                 <input type="hidden" name="id" id="id">
+            </div>
+            <div class="mb-3">
+                <x-utils.form.input name="last_name" />
             </div>
             <div class="mb-3">
                 <x-utils.form.input name="email" type="email" />
             </div>
-            <div class="mb-3">
-                <x-utils.form.input name="dob" id="edit_dob" label="Date of birth" />
-            </div>
-            <div class="mb-3">
-                <div class="col-2 mt-3">
-                    <div class="avatar avatar-lg">
-                        <img data-view-image src="" alt="avatar">
-                    </div>
-                </div>
-                <x-utils.form.input name="image" type="file" :required="false" />
-            </div>
-            <div class="mb-3">
-                <x-utils.form.select name="gender" id="edit_gender" :options="['male', 'female', 'other']" />
-            </div>
-            <div class="mb-3">
-                <x-utils.form.select name="is_manager" id="edit_is_manager" :options="['yes', 'no']" />
-            </div>
+
+
             <div class="mb-3 form-password-toggle">
                 <x-utils.form.input name="password" type="password" label="Password (leave empty if dont want to change)"
                     :required="false" />
+            </div>
+
+            <div class="mb-3">
+                <x-utils.form.select name="role" id="edit_role" :options="['user', 'admin', 'sales']" />
             </div>
             <div class="mt-4  text-center">
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -106,56 +86,47 @@
         $('#dob').flatpickr({
             maxDate: new Date().fp_incr(-18 * 365),
         });
-        $('#add-employee-form').submit(async function(e) {
+        $('#add-user-form').submit(async function(e) {
             e.preventDefault();
             const response = await rebound({
                     form: $(this),
-                    route: "{{ route('admin.employees.store') }}",
+                    route: "{{ route('admin.users.store') }}",
                     returnData: true
                 })
                 .catch(error => {
                     console.log(error);
                 });
-            console.log(response);
+
+            if (response) {
+                $('#add-user-modal').offcanvas('hide');
+            }
         });
-        $('#edit-employee-form').submit(async function(e) {
+
+        $('#edit-user-form').submit(async function(e) {
             e.preventDefault();
             const response = await rebound({
                     form: $(this),
-                    route: "{{ route('admin.employees.update') }}",
+                    route: "{{ route('admin.users.update') }}",
                     returnData: true
                 })
                 .catch(error => {
                     console.log(error);
                 });
-            console.log(response);
+            if (response) {
+                $('#edit-user-modal').offcanvas('hide');
+            }
         });
-        $('#add-employee-bulk-form').submit(async function(e) {
-            e.preventDefault();
-            const response = await rebound({
-                    form: $(this),
-                    route: "{{ route('admin.employees.bulk-store') }}",
-                    returnData: true
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            console.log(response);
-        });
+
 
         const assets = "{{ asset('') }}";
 
         function setVal(data, modal) {
             $(modal + ' #id').val(data.id);
-            $(modal + ' #username').val(data.name);
+            $(modal + ' #first_name').val(data.first_name);
+            $(modal + ' #last_name').val(data.last_name);
             $(modal + ' #email').val(data.email);
-            $('#edit_dob').flatpickr({
-                defaultDate: data.dob,
-                maxDate: new Date().fp_incr(-18 * 365),
-            })
-            $('#edit_gender').selectpicker('val', data.gender)
-            $('#edit_is_manager').selectpicker('val', (data.is_manager) ? 'yes' : 'no')
-            $(modal + ' [data-view-image]').attr('src', assets + '' + data.image);
+            $('#edit_role').selectpicker('val', data.role)
+
             $(modal).offcanvas('show');
         }
 
@@ -192,7 +163,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Deleted!',
-                            text: 'Employee has been deleted.',
+                            text: 'user has been deleted.',
                             customClass: {
                                 confirmButton: 'btn btn-success'
                             }

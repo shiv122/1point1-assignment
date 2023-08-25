@@ -19,22 +19,12 @@
                                     <i class="ti ti-users ti-sm"></i>
                                 </div>
                                 <div class="card-info">
-                                    <h5 class="mb-0">{{ $total_employees }}</h5>
-                                    <small>Employees</small>
+                                    <h5 class="mb-0">{{ $total_users }}</h5>
+                                    <small>Users</small>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-6">
-                            <div class="d-flex align-items-center">
-                                <div class="badge rounded-pill bg-label-info me-3 p-2">
-                                    <i class="ti ti-users ti-sm"></i>
-                                </div>
-                                <div class="card-info">
-                                    <h5 class="mb-0">{{ $total_admins }}</h5>
-                                    <small>Admin</small>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

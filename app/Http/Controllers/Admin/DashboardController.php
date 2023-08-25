@@ -10,8 +10,7 @@ class DashboardController extends Controller
 {
   public function index()
   {
-    $total_employees = User::isEmployee()->count();
-    $total_admins = User::isAdmin()->count();
-    return view('content.pages.admin.index', compact('total_employees', 'total_admins'));
+    $total_users = User::isUser()->count();
+    return view('content.pages.admin.index', compact('total_users'));
   }
 }

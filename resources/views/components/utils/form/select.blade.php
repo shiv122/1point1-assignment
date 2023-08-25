@@ -51,11 +51,15 @@
 @endonce
 
 
-@push('component-scripts')
+@push('component-script')
     @if ($selected)
         <script>
             $(document).ready(function() {
-                $('#{{ $id ?? $name }}').selectpicker('val', @json($selected));
+                @if ($multiple)
+                    $('#{{ $id ?? $name }}').selectpicker('val', @json($selected));
+                @else
+                    $('#{{ $id ?? $name }}').selectpicker('val', '{{ $selected }}');
+                @endif
             });
         </script>
     @endif

@@ -15,7 +15,7 @@ class AdminMiddleware
    */
   public function handle(Request $request, Closure $next): Response
   {
-    if ($request->user()->role !== 'admin') {
+    if (!in_array($request->user()->role, ['admin', 'superadmin', 'sales'])) {
       return redirect()->route('auth.login.index');
     }
     return $next($request);

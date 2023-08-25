@@ -27,8 +27,7 @@ $gray-900: rgba($black, 0.9) !default;
 // scss-docs-start gray-colors-map
 $grays: (
   '25': $gray-25,
-  '50': $gray-50
-) !default;
+  '50': $gray-50) !default;
 // scss-docs-end gray-colors-map
 
 // scss-docs-start color-variables
@@ -45,7 +44,7 @@ $cyan: #00cfe8 !default;
 // scss-docs-end color-variables
 
 // scss-docs-start theme-color-variables
-$primary: #59649c !default;
+$primary: #ec2a29 !default;
 $secondary: #a8aaae !default;
 $success: $green !default;
 $info: $cyan !default;
@@ -66,8 +65,7 @@ $theme-colors: (
   'danger': $danger,
   'light': $light,
   'dark': $dark,
-  'gray': $gray
-) !default;
+  'gray': $gray) !default;
 // scss-docs-end theme-colors-map
 
 $color-scheme: 'light' !default; // (C)
@@ -108,8 +106,7 @@ $sizes-px: (
   px-600: 600px,
   px-700: 700px,
   px-800: 800px,
-  auto: auto
-) !default; // (C)
+  auto: auto) !default; // (C)
 
 // * Body
 // *******************************************************************************
@@ -140,7 +137,7 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1440px // Custom xxl size
-) !default;
+  ) !default;
 // scss-docs-end container-max-widths
 
 $grid-gutter-width: 1.5rem !default;
@@ -197,10 +194,27 @@ $caret-spacing: 0.5em !default;
 // *******************************************************************************
 
 // scss-docs-start font-variables
-$font-family-sans-serif: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell',
-  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
-$font-family-serif: Georgia, 'Times New Roman', serif !default; // (C)
-$font-family-monospace: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$font-family-sans-serif: 'Public Sans',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  'Oxygen',
+  'Ubuntu',
+  'Cantarell',
+  'Fira Sans',
+  'Droid Sans',
+  'Helvetica Neue',
+  sans-serif !default;
+$font-family-serif: Georgia,
+  'Times New Roman',
+  serif !default; // (C)
+$font-family-monospace: 'SFMono-Regular',
+  Menlo,
+  Monaco,
+  Consolas,
+  'Liberation Mono',
+  'Courier New',
+  monospace !default;
 // stylelint-enable value-keyword-case
 $font-family-base: var(--#{$variable-prefix}font-sans-serif) !default;
 $font-family-code: var(--#{$variable-prefix}font-monospace) !default;
@@ -247,8 +261,7 @@ $display-font-sizes: (
   3: 3.875rem,
   4: 3.375rem,
   5: 3rem,
-  6: 2.625rem
-) !default;
+  6: 2.625rem) !default;
 
 $display-font-weight: 500 !default;
 
@@ -433,15 +446,9 @@ $input-focus-box-shadow: $box-shadow-sm !default;
 
 $input-placeholder-color: rgba-to-hex($gray-400, $rgba-to-hex-bg) !default;
 
-$input-height-inner: px-to-rem(
-  floor(rem-to-px(($input-btn-font-size * $input-btn-line-height) + ($input-btn-padding-y * 2)))
-) !default;
-$input-height-inner-sm: px-to-rem(
-  floor(rem-to-px(($input-btn-font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2)))
-) !default; // (C)
-$input-height-inner-lg: px-to-rem(
-  floor(rem-to-px(($font-size-lg * $line-height-lg) + ($input-btn-padding-y-lg * 2)))
-) !default; // (C)
+$input-height-inner: px-to-rem(floor(rem-to-px(($input-btn-font-size * $input-btn-line-height) + ($input-btn-padding-y * 2)))) !default;
+$input-height-inner-sm: px-to-rem(floor(rem-to-px(($input-btn-font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2)))) !default; // (C)
+$input-height-inner-lg: px-to-rem(floor(rem-to-px(($font-size-lg * $line-height-lg) + ($input-btn-padding-y-lg * 2)))) !default; // (C)
 // scss-docs-end form-input-variables
 
 // scss-docs-start form-check-variables
@@ -514,15 +521,18 @@ $form-range-track-disabled-bg: $gray-50 !default; // (C)
 $form-range-thumb-width: 0.75rem !default;
 $form-range-thumb-height: $form-range-thumb-width !default;
 $form-range-thumb-bg: $white !default;
-$form-range-thumb-box-shadow: 0 0 0 1px rgba($black, 0.1), $floating-component-shadow !default;
-$form-range-thumb-focus-box-shadow: 0 0 0 3px rgba($black, 0.1), $floating-component-shadow !default;
+$form-range-thumb-box-shadow: 0 0 0 1px rgba($black, 0.1),
+  $floating-component-shadow !default;
+$form-range-thumb-focus-box-shadow: 0 0 0 3px rgba($black, 0.1),
+  $floating-component-shadow !default;
 $form-range-thumb-active-bg: $form-range-thumb-bg !default;
 $form-range-thumb-disabled-bg: rgba-to-hex($gray-200, $rgba-to-hex-bg) !default;
 // scss-docs-end form-range-variables
 
 // scss-docs-start form-floating-variables
 $form-floating-label-opacity: 0.75 !default;
-$form-floating-transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !default;
+$form-floating-transition: opacity 0.2s ease-in-out,
+  transform 0.2s ease-in-out !default;
 $form-floating-label-transform-rtl: scale(0.85) translateY(-0.5rem) translateX(-0.15rem) !default; // (C)
 // scss-docs-end form-floating-variables
 
@@ -705,7 +715,8 @@ $popover-body-padding-x: 1.125rem !default;
 $toast-padding-y: 0.406rem !default;
 $toast-font-size: $font-size-base !default;
 $toast-color: $body-color !default;
-$toast-background-color: rgba($card-bg, 0.85);
+$toast-background-color: rgba($card-bg, 0.85
+);
 $toast-border-width: 0px !default;
 $toast-header-border-color: rgba($border-color, 0.3) !default;
 $toast-spacing: 1rem !default;
@@ -836,11 +847,10 @@ $breadcrumb-color: $component-active-bg !default; // (C)
 
 $breadcrumb-divider-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-check' width='16' height='24' viewBox='0 0 24 24' stroke-width='1.75' stroke='#{$breadcrumb-divider-color}' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'%3E%3C/path%3E%3Cpath d='M5 12l5 5l10 -10'%3E%3C/path%3E%3C/svg%3E");
 
-$breadcrumb-icon-check-svg: str-replace(
-  str-replace($breadcrumb-divider-check, '#{$breadcrumb-divider-color}', $breadcrumb-divider-color),
-  '#',
-  '%23'
-); // (C)
+$breadcrumb-icon-check-svg: str-replace(str-replace($breadcrumb-divider-check, '#{$breadcrumb-divider-color}', $breadcrumb-divider-color),
+    '#',
+    '%23'
+  ); // (C)
 
 // * Carousel
 // *******************************************************************************

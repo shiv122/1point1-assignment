@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\Employee\BasicController;
-use App\Http\Controllers\Admin\Mail\MailController;
+use App\Http\Controllers\Admin\User\BasicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +16,9 @@ use App\Http\Controllers\Admin\Mail\MailController;
 */
 
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'custom-gate'])->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('index');
-
-
-  Route::prefix('employees')->name('employees.')->controller(BasicController::class)->group(function () {
+  Route::prefix('users')->name('users.')->controller(BasicController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::delete('/delete/{id}', 'delete')->name('delete');

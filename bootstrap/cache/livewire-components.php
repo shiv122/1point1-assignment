@@ -1,3 +1,3 @@
 <?php return array (
-  'tables.employee-table' => 'App\\Http\\Livewire\\Tables\\EmployeeTable',
+  'tables.user-table' => 'App\\Http\\Livewire\\Tables\\UserTable',
 );

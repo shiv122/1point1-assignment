@@ -10,10 +10,10 @@
       "menuHeader": "User Management"
     },
     {
-      "url": "admin/employees",
-      "name": "Employees",
+      "url": "admin/users",
+      "name": "Users",
       "icon": "menu-icon tf-icons ti ti-users",
-      "slug": "admin.employees.index"
+      "slug": "admin.users.index"
     }
   ]
 }

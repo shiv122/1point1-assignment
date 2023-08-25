@@ -3,16 +3,12 @@
 namespace App\Http\Livewire\Tables;
 
 use App\Models\User;
-use App\Exports\EmployeeExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
-use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
 
-class EmployeeTable extends DataTableComponent
+class UserTable extends DataTableComponent
 {
   protected $model = User::class;
 
@@ -27,7 +23,7 @@ class EmployeeTable extends DataTableComponent
   public function builder(): Builder
   {
     $query = User::query();
-    $query->where('role', 'employee')->select();
+    $query->where('role', 'user')->select();
     return $query;
   }
 
@@ -35,32 +31,21 @@ class EmployeeTable extends DataTableComponent
   public function columns(): array
   {
     return [
-      Column::make("Id", "id")
+      Column::make("id")
         ->sortable(),
-      Column::make("Name", "name")
+      Column::make("First Name", "first_name")
         ->sortable(),
-      Column::make("Email", "email")
+      Column::make("Last Name", "last_name")
         ->sortable(),
-      Column::make("Dob", "dob")
-        ->sortable(),
-      Column::make("Image", "image")
-        ->format(function ($val, $row) {
-          return view('components.helper.table.avatar', [
-            'image' => $val
-          ]);
-        })
-        ->html(),
-      Column::make("Gender", "gender")
-        ->sortable(),
-      BooleanColumn::make('is_manager')
+      Column::make("email")
         ->sortable(),
       Column::make('Action', 'action')
         ->label(function ($value, $row) {
-          $edit = route('admin.employees.edit', $value->id);
-          $delete = route('admin.employees.delete', $value->id);
+          $edit = route('admin.users.edit', $value->id);
+          $delete = route('admin.users.delete', $value->id);
           return <<<HTML
                  <div  class="text-nowrap">
-                    <button class="btn btn-label-primary btn-icon  waves-effect" data-modal="#edit-employee-modal" data-callback="setVal" data-edit="$edit">
+                    <button class="btn btn-label-primary btn-icon  waves-effect" data-modal="#edit-user-modal" data-callback="setVal" data-edit="$edit">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                       <path d="M8 20l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4h4z"></path>
@@ -91,18 +76,6 @@ class EmployeeTable extends DataTableComponent
   public function filters(): array
   {
     return [
-      SelectFilter::make('gender')
-        ->options([
-          '' => 'All',
-          'male' => 'Male',
-          'female' => 'Female',
-          'other' => 'Other',
-        ])
-        ->filter(function ($query, $value) {
-          if ($value !== "") {
-            $query->where('gender', $value);
-          }
-        }),
       DateFilter::make('Created At', 'created_at')
         ->filter(function ($query, $value) {
           $query->whereDate('created_at', $value);
@@ -117,10 +90,10 @@ class EmployeeTable extends DataTableComponent
   }
 
 
-  public function export()
-  {
-    $data = $this->getBuilder()->get();
+  // public function export()
+  // {
+  //   $data = $this->getBuilder()->get();
 
-    return Excel::download(new EmployeeExport($data),  'employees-' . now()->format('Y-m-d_H:i') . '.xlsx');
-  }
+  //   return Excel::download(new UserExport($data),  'Users-' . now()->format('Y-m-d_H:i') . '.xlsx');
+  // }
 }

@@ -22,14 +22,14 @@ class MenuServiceProvider extends ServiceProvider
     $adminMenuJson = file_get_contents(base_path('resources/menu/admin-menu.json'));
     $adminMenuData = json_decode($adminMenuJson);
 
-    $employeeMenuJson = file_get_contents(base_path('resources/menu/employee-menu.json'));
-    $employeeMenuData = json_decode($employeeMenuJson);
+    $salesMenuJson = file_get_contents(base_path('resources/menu/sales-menu.json'));
+    $salesMenuData = json_decode($salesMenuJson);
 
 
     // Share all menuData to all the views
     \View::share('menuData', [
       'admin' => $adminMenuData,
-      'employee' => $employeeMenuData,
+      'sales' => $salesMenuData,
     ]);
   }
 }

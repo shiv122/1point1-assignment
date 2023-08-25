@@ -32,12 +32,12 @@
 
 
 @if ($type === 'date')
-    @pushonce('component-scripts')
+    @pushonce('component-script')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
     @endpushonce
 
     @if ($type == 'date')
-        @push('component-scripts')
+        @push('component-script')
             <script>
                 $(function() {
                     flatpickr('#{{ $id ?? $name }}', {

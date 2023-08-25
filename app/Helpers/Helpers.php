@@ -20,7 +20,7 @@ class Helpers
       'myStyle' => 'light',
       'myRTLSupport' => true,
       'myRTLMode' => true,
-      'hasCustomizer' => true,
+      'hasCustomizer' => false,
       'showDropdownOnHover' => true,
       'displayCustomizer' => true,
       'menuFixed' => true,
